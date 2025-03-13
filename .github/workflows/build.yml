@@ -1,17 +1,6 @@
 name: Build ZMK firmware
-
-on:
-  - push
-  - pull_request
-  - workflow_dispatch
+on: [push, pull_request, workflow_dispatch]
 
 jobs:
   build:
     uses: zmkfirmware/zmk/.github/workflows/build-user-config.yml@main
-    with:
-      # Для каждой сборки указываем board и shield через пробел.
-      # Каждая новая строка — отдельная сборка.
-      platform-variants: |
-        nice_nano_v2 corne_left
-        nice_nano_v2 corne_right
-        nice_nano_v2 settings_reset
