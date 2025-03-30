@@ -1,56 +1,119 @@
-/*
- * Copyright (c) 2020 The ZMK Contributors
- *
- * SPDX-License-Identifier: MIT
- */
-
-#include <behaviors.dtsi>
-#include <dt-bindings/zmk/keys.h>
-#include <dt-bindings/zmk/bt.h>
-
 / {
-        keymap {
-                compatible = "zmk,keymap";
+    keymap {
+        compatible = "zmk,keymap";
+        default_layer = "qwerty";
+        layer_names = "qwerty", "lower", "raise", "mouse", "adjust";
 
-                default_layer {
-// -----------------------------------------------------------------------------------------
-// |  TAB |  Q  |  W  |  E  |  R  |  T  |   |  Y  |  U   |  I  |  O  |  P  | BSPC |
-// | CTRL |  A  |  S  |  D  |  F  |  G  |   |  H  |  J   |  K  |  L  |  ;  |  '   |
-// | SHFT |  Z  |  X  |  C  |  V  |  B  |   |  N  |  M   |  ,  |  .  |  /  | ESC  |
-//                    | GUI | LWR | SPC |   | ENT | RSE  | ALT |
-                        bindings = <
-   &kp TAB   &kp Q &kp W &kp E &kp R &kp T   &kp Y &kp U  &kp I     &kp O   &kp P    &kp BSPC
-   &kp LCTRL &kp A &kp S &kp D &kp F &kp G   &kp H &kp J  &kp K     &kp L   &kp SEMI &kp SQT
-   &kp LSHFT &kp Z &kp X &kp C &kp V &kp B   &kp N &kp M  &kp COMMA &kp DOT &kp FSLH &kp ESC
-                  &kp LGUI &mo 1 &kp SPACE   &kp RET &mo 2 &kp RALT
-                        >;
-                };
-                lower_layer {
-// -----------------------------------------------------------------------------------------
-// |  TAB |  1  |  2  |  3  |  4  |  5  |   |  6  |  7  |  8  |  9  |  0  | BSPC |
-// | BTCLR| BT1 | BT2 | BT3 | BT4 | BT5 |   | LFT | DWN |  UP | RGT |     |      |
-// | SHFT |     |     |     |     |     |   |     |     |     |     |     |      |
-//                    | GUI |     | SPC |   | ENT |     | ALT |
-                        bindings = <
-   &kp TAB    &kp N1       &kp N2       &kp N3       &kp N4       &kp N5         &kp N6   &kp N7   &kp N8 &kp N9    &kp N0 &kp BSPC
-   &bt BT_CLR &bt BT_SEL 0 &bt BT_SEL 1 &bt BT_SEL 2 &bt BT_SEL 3 &bt BT_SEL 4   &kp LEFT &kp DOWN &kp UP &kp RIGHT &trans &trans
-   &kp LSHFT  &trans       &trans       &trans       &trans       &trans         &trans   &trans   &trans &trans    &trans &trans
-                                    &kp LGUI     &trans       &kp SPACE      &kp RET  &trans   &kp RALT
-                        >;
-                };
-
-                raise_layer {
-// -----------------------------------------------------------------------------------------
-// |  TAB |  !  |  @  |  #  |  $  |  %  |   |  ^  |  &  |  *  |  (  |  )  | BSPC |
-// | CTRL |     |     |     |     |     |   |  -  |  =  |  [  |  ]  |  \  |  `   |
-// | SHFT |     |     |     |     |     |   |  _  |  +  |  {  |  }  | "|" |  ~   |
-//                    | GUI |     | SPC |   | ENT |     | ALT |
-                        bindings = <
-   &kp  TAB  &kp EXCL &kp AT &kp HASH &kp DLLR &kp PRCNT   &kp CARET &kp AMPS  &kp ASTRK &kp LPAR &kp RPAR &kp BSPC
-   &kp LCTRL &trans   &trans &trans   &trans   &trans      &kp MINUS &kp EQUAL &kp LBKT  &kp RBKT &kp BSLH &kp GRAVE
-   &kp LSHFT &trans   &trans &trans   &trans   &trans      &kp UNDER &kp PLUS  &kp LBRC  &kp RBRC &kp PIPE &kp TILDE
-                             &kp LGUI &trans   &kp SPACE   &kp RET   &trans    &kp RALT
-                        >;
-                };
+        qwerty {
+            bindings = <
+                /* Row 1 */
+                &kp ESC    &kp GRV    &mt LGUI Q      &kp W    &kp E    &kp R    &kp T    &kp Y    &kp U    &kp I    &kp O    &kp P    &kp LBRC    &mt RGUI RBRC
+                /* Row 2 */
+                &kp TAB    &mt LSFT A  &kp S    &kp D    &mt RALT F  &kp G    &kp H    &kp J    &kp K    &kp L    &kp SCLN   &mt RCTL QUOT
+                /* Row 3 */
+                &kp LCTL   &mt LCTL Z  &kp X    &kp C    &kp V    &kp B    &kp N    &kp M    &kp COMM   &kp DOT   &kp SLSH   &mt RALT BSLS
+                /* Row 4 */
+                          &mt LSFT SPC   &kp LGUI   &lt MOUSE ESC   &lt LOWER ENT   &mt RGUI BSPC   &lt RAISE DEL
+            >;
         };
+
+        lower {
+            bindings = <
+                /* Row 1 */
+                &trans    &kp UNDS    &mt LGUI F1    &kp F2    &kp F3    &kp F4    &kp F5    &kp F6    &kp F7    &kp F8    &kp F9    &kp F10   &kp F11    &mt RGUI F12
+                /* Row 2 */
+                &mt LCTL PPLS   &mt LSFT EXLM   &kp AT    &kp HASH   &mt LALT DLR   &kp PERC   &kp CIRC   &kp AMPR   &kp ASTR   &kp LPRN   &kp RPRN   &mt RCTL MINS
+                /* Row 3 */
+                &mt LALT EQL    &mt LCTL 1     &kp 2    &kp 3    &kp 4    &kp 5    &kp 6    &kp 7    &kp 8    &kp 9    &kp 0    &trans
+                /* Row 4 */
+                          &trans   &trans   &trans   &trans   &trans   &trans
+            >;
+        };
+
+        raise {
+            bindings = <
+                /* Row 1 */
+                &trans    &kp NUM    &mt LGUI PSLS    &kp P7    &kp P8    &kp P9    &kp PMNS   &kp VOLU   &kp HOME   &kp UP    &kp PGUP   &kp PAUS   &kp CAPS    &trans
+                /* Row 2 */
+                &mt LCTL EQL    &mt LSFT PAST   &kp P4    &kp P5    &mt LALT P6   &kp PPLS   &kp MUTE   &kp LEFT   &kp DOWN   &kp RGHT   &kp INS    &mt RCTL APP
+                /* Row 3 */
+                &mt LALT EQL    &mt LCTL P0    &kp P1    &kp P2    &kp P3    &kp PCMM   &kp VOLD   &kp END    &kp PSCR   &kp PGDN   &kp SCRL   &trans
+                /* Row 4 */
+                          &trans   &trans   &trans   &trans   &trans   &trans
+            >;
+        };
+
+        mouse {
+            bindings = <
+                /* Row 1 */
+                &trans    &trans    &trans    &trans    &kp MS_ACL0    &kp MS_BTN2    &trans    &trans    &kp MS_WHLL    &kp MS_WHLD    &kp MS_WHLU    &kp MS_WHLR    &trans    &trans
+                /* Row 2 */
+                &trans    &trans    &trans    &kp MS_ACL1    &kp MS_BTN1    &trans    &trans    &kp MS_LEFT    &kp MS_DOWN    &kp MS_UP    &kp MS_RGHT    &trans
+                /* Row 3 */
+                &trans    &trans    &trans    &kp MS_ACL2    &trans    &trans    &trans    &trans    &trans    &trans    &trans    &trans
+                /* Row 4 */
+                          &trans   &trans   &trans   &trans   &trans   &trans
+            >;
+        };
+
+        adjust {
+            bindings = <
+                /* Row 1 – убраны клавиши, связанные с RGB */
+                &boot    &trans    &kp AS_UP    &kp AS_TOGG    &kp AS_DOWN    &trans    &trans    &trans    &trans    &kp AS_DOWN    &kp AS_TOGG    &kp AS_UP    &trans    &boot
+                /* Row 2 */
+                &trans   &trans   &trans   &trans   &trans   &trans   &trans   &trans   &trans   &trans   &trans   &trans
+                /* Row 3 */
+                &trans   &trans   &trans   &trans   &trans   &trans   &trans   &trans   &trans   &trans   &trans   &trans
+                /* Row 4 */
+                          &trans   &kp SH_TOGG   &trans   &trans   &kp SH_TOGG   &trans
+            >;
+        };
+    };
+};
+
+combos {
+    compatible = "zmk,combos";
+
+    qwerty_esc {
+        timeout-ms = <50>;
+        /* Клавиши Q и W находятся на позициях 2 и 3 (нумерация с 0) */
+        key-positions = <2 3>;
+        bindings = <&kp ESC>;
+    };
+
+    yu_left_paren {
+        timeout-ms = <50>;
+        key-positions = <7 8>;
+        bindings = <&kp LEFT_PAREN>;
+    };
+
+    ui_right_paren {
+        timeout-ms = <50>;
+        key-positions = <8 9>;
+        bindings = <&kp RIGHT_PAREN>;
+    };
+
+    hj_left_curly {
+        timeout-ms = <50>;
+        key-positions = <20 21>;
+        bindings = <&kp LEFT_CURLY_BRACE>;
+    };
+
+    jk_right_curly {
+        timeout-ms = <50>;
+        key-positions = <21 22>;
+        bindings = <&kp RIGHT_CURLY_BRACE>;
+    };
+
+    nm_pipe {
+        timeout-ms = <50>;
+        key-positions = <32 33>;
+        bindings = <&kp PIPE>;
+    };
+
+    rt_underscore {
+        timeout-ms = <50>;
+        key-positions = <5 6>;
+        bindings = <&kp UNDERSCORE>;
+    };
 };
