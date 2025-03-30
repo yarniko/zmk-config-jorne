@@ -76,7 +76,6 @@ combos {
 
     qwerty_esc {
         timeout-ms = <50>;
-        /* Клавиши Q и W находятся на позициях 2 и 3 (нумерация с 0) */
         key-positions = <2 3>;
         bindings = <&kp ESC>;
     };
